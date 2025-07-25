@@ -1,0 +1,135 @@
+*{
+    transition: .2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --pink: #cf3bed;
+    --hover-pink: #b535cf;
+    --green: #289157;
+    --hover-green: #2e935c;
+    --cyan: #196c62;
+    --hover-cyan: #25b09b;
+    --blue: #1e639f;
+    --hover-blue: #3888cf;
+    --grey: #747474;
+    --red: #be2172;
+    --white: #f1f5f9;
+}
+
+/* color */
+.primary-bg-color {
+    background-color: var(--pink);
+    opacity: 1;
+}
+
+.hover-primary-bg-color {
+    background-color: var(--hover-pink);
+    opacity: 1;
+}
+
+.success-bg-color {
+    background-color: var(--green);
+    opacity: 1;
+}
+
+.hover-success-bg-color {
+    background-color: var(--hover-green);
+    opacity: 1;
+}
+
+.error-bg-color {
+    background-color: var(--red);
+    opacity: 1;
+}
+
+.grey-bg-color {
+    background-color: var(--grey);
+    opacity: 1;
+}
+
+.info-bg-color {
+    background-color: var(--blue);
+    opacity: 1;
+}
+
+.hover-info-bg-color {
+    background-color: var(--hover-blue);
+    opacity: 1;
+}
+
+
+/* color */
+.primary-color {
+    color: var(--pink);
+    opacity: 1;
+}
+
+.hover-primary-color {
+    color: var(--hover-pink);
+    opacity: 1;
+}
+
+.success-color {
+    color: var(--green);
+    opacity: 1;
+}
+
+.hover-success-color {
+    color: var(--hover-green);
+    opacity: 1;
+}
+
+.error-color {
+    color: var(--red);
+    opacity: 1;
+}
+
+.grey-color {
+    color: var(--grey);
+    opacity: 1;
+}
+
+.info-color {
+    color: var(--blue);
+    opacity: 1;
+}
+
+.hover-info-color {
+    color: var(--hover-blue);
+    opacity: 1;
+}
+
+.btn-hover:hover *{
+    color: var(--white);
+}
+
+.custom-grid{
+    display: grid;
+    grid-gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.44, rgb(122, 153, 217)),
+            color-stop(0.72, rgb(73, 125, 189)),
+            color-stop(0.86, rgb(28, 58, 148)));
+}
