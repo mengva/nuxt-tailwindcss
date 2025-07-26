@@ -4,6 +4,12 @@ export const maxWidth = '300px';
 export const minWidth = '80px';
 export const emailFormatter = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
+export const inputMessage = {
+    isError: false,
+    isSuccess: false,
+    message: "",
+}
+
 export const MENUS: MENUS_SCHEMA[] = [
     {
         title: 'Home',

@@ -2,7 +2,7 @@
     <div :class="divClassName">
         <p class="text-slate-600 dark:text-slate-400 mb-2 capitalize">{{ name }}</p>
         <input @input="onChangeValue" v-model="inputValue" ref="inputElement"
-            :class="`${inputClassName} ${isError ? '!bg-rose-500/[.2] !caret-rose-500 placeholder:!text-rose-500 !text-rose-500' : isSuccess ? '!bg-[#28915746] !caret-[#289157] placeholder:!text-[#289157] !text-[#289157]' : ''}`"
+            :class="`${inputClassName} ${inputMessage?.isError ? '!bg-rose-500/[.2] !caret-rose-500 placeholder:!text-rose-500 !text-rose-500' : inputMessage?.isSuccess ? '!bg-[#28915746] !caret-[#289157] placeholder:!text-[#289157] !text-[#289157]' : ''}`"
             :type="type" 
             :readOnly="readOnly" 
             :disabled="disable" 
@@ -10,12 +10,13 @@
             :name="name" 
             :id="id"
             :placeholder="placeholder" />
-        <p :class="`${isError ? 'text-rose-500 block' : isSuccess ? 'text-[#289157] block' : 'hidden'} text-md mt-1`">{{ message }}</p>
+        <p :class="`${inputMessage?.isError ? 'text-rose-500 block' : inputMessage?.isSuccess ? 'text-[#289157] block' : 'hidden'} text-md mt-1`">{{ inputMessage?.message }}</p>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { emailFormatter } from '../composables/constants';
 
 const props = defineProps({
     inputClassName: String,
@@ -27,18 +28,16 @@ const props = defineProps({
     name: String,
     id: String,
     placeholder: String,
+    inputMessage: Object
 });
 
 const inputElement = ref<HTMLInputElement | null>(null);
-const emit = defineEmits(['inputElm'])
+const emit = defineEmits(['inputValue', 'inputElm'])
 
-const isError = ref(false);
-const isSuccess = ref(false);
-const message = ref("");
 const inputValue = ref("");
 
 function onChangeValue(){
-    emit("inputElm", inputValue.value);
+    emit("inputValue", inputValue.value);
     if(!inputValue.value){
         setError(false, `${props.name} is required`);
         return;
@@ -51,6 +50,10 @@ function onChangeValue(){
         setError(false, `invalid ${props.name}`);
         return;
     }
+    if(props.name === 'otp' && inputValue.value.length < 6){
+        setError(false, `${props.name} must be equal to 6 characters`);
+        return;
+    }
     if(inputValue.value.length <= 2){
         setError(false, `${props.name} must be greater than 2 characters`);
         return;
@@ -58,12 +61,19 @@ function onChangeValue(){
     setError(true, '');
 }
 
-function setError(success: boolean, msg: string){
-    isError.value = !success;
-    isSuccess.value = success;
-    message.value = msg;
+function setError(isSuccess: boolean, msg: string){
+    if (props.inputMessage) {
+        props.inputMessage.isError = !isSuccess;
+        props.inputMessage.isSuccess = isSuccess;
+        props.inputMessage.message = msg;
+    }
 }
 
+onMounted(() => {
+    if(inputElement.value){
+        emit('inputElm', inputElement.value);
+    }
+});
 </script>
 
 <style></style>

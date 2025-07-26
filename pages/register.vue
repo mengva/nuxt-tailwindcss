@@ -19,7 +19,9 @@
           name="firstName"
           id="firstName"
           placeholder="Enter your firstName..."
-          @inputElm="(el) => inputFirstNameElm = el"
+          :input-message="inputErrorMessage.firstName"
+          @input-value="(value) => body.firstName = value"
+          @input-elm="(elm) => inputFirstNameElm = elm"
         />
         <Input
           div-class-name="mb-4"
@@ -31,7 +33,9 @@
           name="lastName"
           id="lastName"
           placeholder="Enter your lastName..."
-          @inputElm="(el) => inputLastNameElm = el"
+          :input-message="inputErrorMessage.lastName"
+          @input-value="(value) => body.lastName = value"
+          @input-elm="(elm) => inputLastNameElm = elm"
         />
         <Input
           div-class-name="mb-4"
@@ -43,7 +47,9 @@
           name="email"
           id="email"
           placeholder="Enter your email..."
-          @inputElm="(el) => inputEmailElm = el"
+          :input-message="inputErrorMessage.email"
+          @input-value="(value) => body.email = value"
+          @input-elm="(elm) => inputEmailElm = elm"
         />
         <Input
           div-class-name="mb-4"
@@ -55,7 +61,9 @@
           name="password"
           id="password"
           placeholder="Enter your password..."
-          @inputElm="(el) => inputPasswordElm = el"
+          :input-message="inputErrorMessage.password"
+          @input-value="(value) => body.password = value"
+          @input-elm="(elm) => inputPasswordElm = elm"
         />
         <p class="text-slate-600 dark:text-slate-400 mb-2 capitalize">Gender</p>
         <select ref="inputGenderElm" @change="onSelectedGender" v-model="body.gender" name="gender" class="mb-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 caret-slate-600 dark:caret-slate-300 w-full h-[60px] px-4 rounded-xl">
@@ -81,6 +89,7 @@
 <script lang="ts" setup>
 
 import { ref } from "vue";
+import {inputMessage} from "../composables/constants"
 
 definePageMeta({
   layout: "spacial"
@@ -100,14 +109,24 @@ const body = ref({
   gender: '',
 });
 
+const inputErrorMessage = ref({
+  firstName: {...inputMessage},
+  lastName: {...inputMessage},
+  email: {...inputMessage},
+  password: {...inputMessage},
+  gender: {...inputMessage},
+});
 
 function onSelectedGender(event: InputEvent){
   body.value.gender = event.target?.value;
 }
 
 function onRegister(){
-  console.log(inputEmailElm.value);
-  console.log(body.value);
+  try {
+    console.log(inputErrorMessage.value);
+  } catch (error) {
+    
+  }
 }
 </script>
 
