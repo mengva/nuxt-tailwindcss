@@ -56,12 +56,12 @@ function getAppContainerElm() {
 
 function onAddClass(appBar: HTMLElement) {
     appBar.classList.add("shadow-2xl", "shadow-purple-500");
-    appBar.classList.replace("from-cyan-800", "from-purple-500");
+    // appBar.classList.replace("from-cyan-800", "from-purple-500");
 }
 
 function onRemoveClass(appBar: HTMLElement) {
     appBar.classList.remove("shadow-2xl", "shadow-purple-500");
-    appBar.classList.replace("from-purple-500", "from-cyan-800");
+    // appBar.classList.replace("from-purple-500", "from-cyan-800");
 }
 
 function onGetEmlAndAddEvent(){

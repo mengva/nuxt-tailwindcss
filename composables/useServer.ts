@@ -1,7 +1,7 @@
 import type { UseFetchOptions } from "nuxt/app";
 import { defu } from "defu";
 
-export function useServer<T>(url: string, options: UseFetchOptions<T> = {}) {
+export async function useServer<T>(url: string, options: UseFetchOptions<T> = {}) {
     const token = useCookie("token");
     const headers = process.server ? useRequestHeaders() : {};
     const defaults: UseFetchOptions<T> = {

@@ -65,18 +65,38 @@
           @input-value="(value) => body.password = value"
           @input-elm="(elm) => inputPasswordElm = elm"
         />
-        <p class="text-slate-600 dark:text-slate-400 mb-2 capitalize">Gender</p>
-        <select ref="inputGenderElm" @change="onSelectedGender" v-model="body.gender" name="gender" class="mb-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 caret-slate-600 dark:caret-slate-300 w-full h-[60px] px-4 rounded-xl">
-          <option value="">Select Gender</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-          <option value="other">other</option>
-        </select>
-        <Button type="submit" title="REGISTER"
-          :button-class-name="`mb-4 rounded-2xl bg-purple-600 hover:bg-purple-700 cursor-pointer w-full h-[60px] text-slate-200 flex justify-center items-center px-4 gap-x-2`"
-          icon-class-name="text-2xl text-slate-200" span-class-name="text-xl text-slate-200"
-          icon="mdi:register" :isShowIcon="true" :isShowTitle="true"
-          @on-submit="() => {}" />
+        <Selected
+          div-class-name="mb-4"
+          input-class-name="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 caret-slate-600 dark:caret-slate-300 w-full h-[60px] px-4 rounded-xl"
+          name="gender"
+          title="Gender"
+          :inputMessage="inputErrorMessage.gender"
+          :lists="[
+            {
+              title: 'Choose Gender',
+              value: ''
+            },
+            {
+              title: 'Male',
+              value: 'male'
+            },
+            {
+              title: 'Female',
+              value: 'female'
+            },
+            {
+              title: 'Other',
+              value: 'other'
+            }
+          ]"
+          @input-value="(value) => body.gender = value"
+          @input-elm="(elm) => inputGenderElm = elm"
+        />
+          <Button type="submit" title="REGISTER"
+            :button-class-name="`mb-4 rounded-2xl bg-purple-600 hover:bg-purple-700 cursor-pointer w-full h-[60px] text-slate-200 flex justify-center items-center px-4 gap-x-2`"
+            icon-class-name="text-2xl text-slate-200" span-class-name="text-xl text-slate-200"
+            icon="mdi:register" :isShowIcon="true" :isShowTitle="true"
+            @on-submit="() => {}" />
           <div class="flex justify-center gap-x-4 items-center">
             <p class="text-slate-600 dark:text-slate-400">You already an account</p>
             <p @click="navigateTo('/login')" class="tracking-[1px] text-purple-600 underline px-4 py-1 hover:bg-slate-400/40 dark:hover:bg-slate-800/40 rounded-xl cursor-pointer">login</p>
